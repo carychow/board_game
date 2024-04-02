@@ -1,3 +1,5 @@
+from typing import TypeVar, Generic, Type
+
 class Block:
     _value: int
 
@@ -12,16 +14,19 @@ class Block:
     def value(self, v):
         self._value = v
 
+_TBlock = TypeVar("_TBlock")
 
 # Assume it is 2D
-class Board:
+class Board(Generic[_TBlock]):
     _width: int
     _height: int
     _rows = None
+    _m_class = None
 
-    def __init__(self):
+    def __init__(self, m_class: Type[_TBlock]):
         self._width = 0
         self._height = 0
+        self._m_class = m_class
 
     @property
     def width(self):
@@ -48,13 +53,15 @@ class Board:
                         count += 1
         return count
 
-    def build(self):
+    def build(self) -> list[list[_TBlock]]:
         self._rows = []
         for i in range(0, self._width):
             col = []
 
             for j in range(0, self._height):
-                block = Block()
+                block = self._m_class()
                 col.append(block)
 
             self._rows.append(col)
+
+        return self._rows

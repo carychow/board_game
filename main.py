@@ -1,11 +1,12 @@
-import board
+#from common import board
+from tic_tac_toe import TicTacToe
 
 print("Program started.")
 
 print("Initialize the board.")
-b = board.Board()
-b.width = 3
-b.height = 3
+b = TicTacToe()
+# b.width = 3
+# b.height = 3
 
 print("Build the board.")
 b.build()
