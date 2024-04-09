@@ -1,10 +1,13 @@
 from typing import TypeVar, Generic, Type
 
+
 class Block:
+    DEF_VAL = -1
+
     _value: int
 
     def __init__(self):
-        pass
+        self._value = self.DEF_VAL
 
     @property
     def value(self):
@@ -14,7 +17,9 @@ class Block:
     def value(self, v):
         self._value = v
 
+
 _TBlock = TypeVar("_TBlock")
+
 
 # Assume it is 2D
 class Board(Generic[_TBlock]):
